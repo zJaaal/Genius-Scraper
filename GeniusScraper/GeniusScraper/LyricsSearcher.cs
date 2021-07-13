@@ -8,6 +8,7 @@ using System.Net;
 using HtmlAgilityPack;
 using PuppeteerSharp;
 using System.IO;
+using Serilog;
 
 namespace GeniusScraper
 {
@@ -30,34 +31,31 @@ namespace GeniusScraper
             string Link = await GetURL(args);
             List<string> Links = await GetLinks(Link);
 
+            Log.Debug("Searching for links");
             foreach (string link in Links)
-            {
-                Console.WriteLine(link);
-            }
+                Log.Verbose($"Link: {link}"); //Esto es innecesario, y si el nivel de loggeo no es Verbose, es procesamiento perdido
+
             return Link;
         }
         public static async Task InitPuppeteer()
         {
-            Console.WriteLine("Initializing Puppeteer...");
-
-            Console.WriteLine("Initializing Browser...");
+            Log.Information("Initializing Puppeteer");
+            Log.Debug("Initializing Browser");
             browser = await Puppeteer.LaunchAsync(Options, null);
 
-            Console.WriteLine("Initializing Page...");
+            Log.Debug("Initializing Page");
             page = await browser.NewPageAsync();
         }
         public static async Task<List<string>> GetLinks(string link)
         {
             page = await browser.NewPageAsync();
-            Console.WriteLine($"Going to {link}");
+            Log.Debug($"Navigating to {link}");
             await page.GoToAsync(link);
 
             var Links = @"Array.from(document.querySelectorAll('a.mini_card')).map(a => a.href);";
 
-            Console.WriteLine("Executing Query...");
+            Log.Debug("Querying the page");
             var urls = await page.EvaluateExpressionAsync<string[]>(Links);
-
-            Console.WriteLine("Done");
             var MyUrls = urls.Where(Url => Url.Contains("-lyrics")).ToList();
             return MyUrls;
         }
