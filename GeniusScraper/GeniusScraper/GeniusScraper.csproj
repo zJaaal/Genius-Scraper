@@ -7,7 +7,8 @@
 
   <ItemGroup>
     <PackageReference Include="HtmlAgilityPack" Version="1.11.34" />
-    <PackageReference Include="Knyaz.Optimus" Version="2.4.1" />
+    <PackageReference Include="Knyaz.Optimus" Version="3.0.0-beta-305" />
+    <PackageReference Include="Knyaz.Optimus.Scripting.Jint" Version="3.0.0-beta-305" />
     <PackageReference Include="PuppeteerSharp" Version="5.0.0" />
   </ItemGroup>
 

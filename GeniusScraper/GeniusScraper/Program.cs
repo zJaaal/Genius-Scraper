@@ -7,7 +7,6 @@ namespace GeniusScraper
     {
         static async Task Main(string[] args)
         {
-            await LyricsSearcher.InitPuppeteer();
             while (true)
             {
                 var A = Console.ReadLine();
