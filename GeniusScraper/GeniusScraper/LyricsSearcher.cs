@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using System.Net;
 using HtmlAgilityPack;
 using PuppeteerSharp;
+using System.IO;
+
 namespace GeniusScraper
 {
     public class LyricsSearcher
@@ -15,7 +17,7 @@ namespace GeniusScraper
         private static LaunchOptions Options = new()
         {
             Headless = true,
-            ExecutablePath = "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe",
+            ExecutablePath = Path.Combine("C:", "Programs Files", "Google", "Chrome", "Application", "chrome.exe"),
             Product = Product.Chrome
         };
         private static Browser browser { get; set; }
