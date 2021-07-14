@@ -18,8 +18,8 @@ namespace GeniusScraper
         private static LaunchOptions Options = new()
         {
             Headless = true,
-            ExecutablePath = Path.Combine("C:", "Programs Files", "Google", "Chrome", "Application", "chrome.exe"),
-            Product = Product.Chrome
+            ExecutablePath = Path.Combine("/usr", "lib", "firefox", "firefox"),
+            Product = Product.Firefox
         };
         private static Browser browser { get; set; }
         private static Page page { get; set; }
