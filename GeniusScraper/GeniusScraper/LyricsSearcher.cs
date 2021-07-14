@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Knyaz.Optimus;
@@ -27,11 +28,20 @@ namespace GeniusScraper
         }
         public static async Task<IEnumerable<IElement>> GetLinks(string link)
         {
+
             System.Console.WriteLine($"Going to {link}");
             var page = await _engine.OpenUrl(link);
             System.Console.WriteLine("Done");
-            var urls = page.Document.WaitSelector("a.mini_card");
+            var doc = page.Document;
+
+            var urls = page.Document.WaitSelector("#search_results_label text_label text_label--x_small_text_size text_label--gray search_results_label--no_horizontal_padding mini-song-card");
             return urls;
+
+            //var page = await _engine.OpenUrl("https://html5test.com");
+
+            //Wait until it finishes the test of browser and get DOM element with score value.
+            var tagWithValue = page.Document.WaitSelector("#score strong");
+            return tagWithValue;
         }
     }
 }
